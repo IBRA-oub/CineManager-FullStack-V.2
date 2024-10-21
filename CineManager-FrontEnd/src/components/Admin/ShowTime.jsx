@@ -4,6 +4,7 @@ import { getAllFilms } from '../../../services/filmApi/getAllFilmApi';
 import { getAllSalle } from '../../../services/salleApi/getAllSalleApi';
 import { creatSession } from '../../../services/sessionApi/createSessionApi';
 import { updateSession } from '../../../services/sessionApi/updateSessionApi';
+import { deleteSessionApi } from '../../../services/sessionApi/deleteSessionApi';
 
 export default function ShowTime() {
     const [isAddPopupOpen, setIsAddPopupOpen] = useState(false);
@@ -14,17 +15,19 @@ export default function ShowTime() {
     const closeUpdatePopup = () => setIsUpdatePopupOpen(false);
 
     const [sessions, setSessions] = useState([]);
-    
-    
+
+
+
     const [films, setFilms] = useState([]);
     const [salles, setSalles] = useState([]);
     const [fetchTrigger, setFetchTrigger] = useState(false);
 
-    const [dateField,setDateField] = useState('')
-    const [priceField,setPriceField] = useState('')
-    const [Locationfield,setLocationField] = useState('')
-    const [filmId,setFilmId] = useState('')
-    const [salleId,setSalleId] = useState('')
+    const [dateField, setDateField] = useState('')
+    const [priceField, setPriceField] = useState('')
+    const [Locationfield, setLocationField] = useState('')
+    const [filmId, setFilmId] = useState('')
+    const [salleId, setSalleId] = useState('')
+    const [showConfirmPopup, setShowConfirmPopup] = useState(false);
     const [selectedSession, setSelectedSession] = useState(null);
 
     // =============================================================
@@ -71,7 +74,7 @@ export default function ShowTime() {
             location: Locationfield,
             filmId: filmId,
             salleId: salleId,
-           
+
         }
 
 
@@ -86,7 +89,7 @@ export default function ShowTime() {
 
     // ===========================update=========================
 
-    const UpdateSession = (sessionId) => {
+    const handleUpdateSession = (sessionId) => {
         setSelectedSession(sessionId);
         setIsUpdatePopupOpen(true);
     };
@@ -95,24 +98,49 @@ export default function ShowTime() {
         e.preventDefault();
 
         const data = {
+
             date_heure: dateField,
             tarif: priceField,
             location: Locationfield,
             filmId: filmId,
             salleId: salleId,
-           
+
         }
 
-        const showTimeData = await updateSession(setSelectedSession, data);
+        const showTimeData = await updateSession(selectedSession, data);
+        console.log(showTimeData);
+
         if (showTimeData) {
             setSessions(prevSession => [...prevSession, sessions]);
         }
-        
+
         setIsUpdatePopupOpen(false)
         setFetchTrigger(true);
 
 
     }
+
+    // ==========================delete ===================
+
+    const confirmDeleteSession = (SessionId) => {
+        setSelectedSession(SessionId);
+
+        setShowConfirmPopup(true);
+    };
+
+    const handleDeleteSession = async () => {
+        const sessionData = await deleteSessionApi(selectedSession);
+        if (sessionData) {
+            setSessions(prevSession => [...prevSession, sessionData]);
+        }
+        setShowConfirmPopup(false)
+        setFetchTrigger(true);
+    };
+
+    const cancelDelete = () => {
+        setShowConfirmPopup(false);
+        setSelectedSession(null);
+    };
 
     return (
         <>
@@ -134,9 +162,7 @@ export default function ShowTime() {
                                     <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
                                         <p className="block antialiased font-sans text-sm text-black  leading-none font-semibold">Location</p>
                                     </th>
-                                    <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                                        <p className="block antialiased font-sans text-sm text-black  leading-none font-semibold">All Places</p>
-                                    </th>
+
                                     <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
                                         <p className="block antialiased font-sans text-sm text-black  leading-none font-semibold">Empty Place</p>
                                     </th>
@@ -156,17 +182,17 @@ export default function ShowTime() {
                             <tbody className=''>
                                 {
                                     sessions.map((session) => {
-                                        const placesDisponibles = Array.isArray(session.places) 
-                                        ? session.places.filter(place => place.disponible).length 
-                                        : 0;                                        return (
+
+                                        const placesDisponibles = Array.isArray(session.places)
+                                            ? session.places.filter(place => place.disponible).length
+                                            : 0;
+                                        return (
+
                                             <tr key={session._id}>
                                                 <td className="p-4 border-b border-blue-gray-50">
                                                     <div className="flex items-center gap-3">
-                                                        <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-bold">2024-2-13</p>
+                                                        <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-bold">{session.date_heure}</p>
                                                     </div>
-                                                </td>
-                                                <td className="p-4 border-b border-blue-gray-50">
-                                                    <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{session.date_heure}</p>
                                                 </td>
                                                 <td className="p-4 border-b border-blue-gray-50">
                                                     <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{session.tarif}</p>
@@ -174,6 +200,7 @@ export default function ShowTime() {
                                                 <td className="p-4 border-b border-blue-gray-50">
                                                     <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{session.location}</p>
                                                 </td>
+
                                                 <td className="p-4 border-b border-blue-gray-50">
                                                     <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{placesDisponibles}</p>
                                                 </td>
@@ -186,12 +213,12 @@ export default function ShowTime() {
 
 
                                                 <td className=" border-b border-blue-gray-50">
-                                                    <button onClick={()=>UpdateSession(session._id)} className="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20" type="button">
+                                                    <button onClick={() => handleUpdateSession(session._id)} className="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20" type="button">
                                                         <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
                                                             <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path fill="#1bff0a" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z" /></svg>
                                                         </span>
                                                     </button>
-                                                    <button  className="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20" type="button">
+                                                    <button onClick={() => confirmDeleteSession(session._id)} className="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20" type="button">
                                                         <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
                                                             <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 448 512"><path fill="#ff0a0a" d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" /></svg>                                            </span>
                                                     </button>
@@ -222,9 +249,9 @@ export default function ShowTime() {
                                 <div className='mb-4'>
                                     <label>Date/Hour</label>
                                     <input
-                                        type='datef'
+                                        type='date'
                                         name='title'
-                                        onChange={(e)=>setDateField(e.target.value)}
+                                        onChange={(e) => setDateField(e.target.value)}
                                         className='w-full border border-gray-300 rounded-md p-2'
                                     />
                                 </div>
@@ -233,7 +260,7 @@ export default function ShowTime() {
                                     <input
                                         type='text'
                                         name='price'
-                                        onChange={(e)=>setPriceField(e.target.value)}
+                                        onChange={(e) => setPriceField(e.target.value)}
                                         className='w-full border border-gray-300 rounded-md p-2'
                                     />
                                 </div>
@@ -242,7 +269,7 @@ export default function ShowTime() {
                                     <input
                                         type='text'
                                         name='location'
-                                        onChange={(e)=>setLocationField(e.target.value)}
+                                        onChange={(e) => setLocationField(e.target.value)}
                                         className='w-full border border-gray-300 rounded-md p-2'
                                     />
                                 </div>
@@ -250,7 +277,7 @@ export default function ShowTime() {
                                     <label>Film</label>
                                     <select
                                         name='filmId'
-                                        onChange={(e)=>setFilmId(e.target.value)}
+                                        onChange={(e) => setFilmId(e.target.value)}
                                         className='w-full border border-gray-300 rounded-md p-2'
                                     >
                                         <option >Chose Film </option>
@@ -265,7 +292,7 @@ export default function ShowTime() {
                                     <label>Salle</label>
                                     <select
                                         name='salleId'
-                                        onChange={(e)=>setSalleId(e.target.value)}
+                                        onChange={(e) => setSalleId(e.target.value)}
                                         className='w-full border border-gray-300 rounded-md p-2'
                                     >
 
@@ -274,7 +301,7 @@ export default function ShowTime() {
                                         {salles.map((salle) => (
 
                                             <option value={salle._id}>{salle.nom}</option>
-                                        ))} 
+                                        ))}
                                     </select>
                                 </div>
 
@@ -306,7 +333,7 @@ export default function ShowTime() {
                                     <input
                                         type='date'
                                         name='title'
-                                        onChange={(e)=>setDateField(e.target.value)}
+                                        onChange={(e) => setDateField(e.target.value)}
                                         className='w-full border border-gray-300 rounded-md p-2'
                                     />
                                 </div>
@@ -315,7 +342,7 @@ export default function ShowTime() {
                                     <input
                                         type='number'
                                         name='title'
-                                        onChange={(e)=>setPriceField(e.target.value)}
+                                        onChange={(e) => setPriceField(e.target.value)}
                                         className='w-full border border-gray-300 rounded-md p-2'
                                     />
                                 </div>
@@ -324,7 +351,7 @@ export default function ShowTime() {
                                     <input
                                         type='text'
                                         name='title'
-                                        onChange={(e)=>setLocationField(e.target.value)}
+                                        onChange={(e) => setLocationField(e.target.value)}
                                         className='w-full border border-gray-300 rounded-md p-2'
                                     />
                                 </div>
@@ -332,7 +359,7 @@ export default function ShowTime() {
                                     <label>Film</label>
                                     <select
                                         name='description'
-                                        onChange={(e)=>setFilmId(e.target.value)}
+                                        onChange={(e) => setFilmId(e.target.value)}
                                         className='w-full border border-gray-300 rounded-md p-2'
                                     >
                                         <option >Chose Film </option>
@@ -347,7 +374,7 @@ export default function ShowTime() {
                                     <label>Salle</label>
                                     <select
                                         name='description'
-                                        onChange={(e)=>setSalleId(e.target.value)}
+                                        onChange={(e) => setSalleId(e.target.value)}
                                         className='w-full border border-gray-300 rounded-md p-2'
                                     >
                                         <option >Chose The Salle</option>
@@ -368,6 +395,31 @@ export default function ShowTime() {
                                     </button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {showConfirmPopup && (
+                <div className="fixed inset-0  flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-6 rounded-lg shadow-lg">
+                        <div className="text-center p-5 flex-auto justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 -m-1 flex items-center text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 flex items-center text-red-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                            </svg>
+                            <h2 className="text-xl font-bold py-4 ">Are you sure?</h2>
+                            <p className="text-sm text-gray-500 px-8">Do you really want to delete this Session?
+                                This process cannot be undone</p>
+                        </div>
+
+                        <div className="p-3  mt-2 text-center space-x-4 md:block">
+                            <button onClick={cancelDelete} className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100">
+                                Cancel
+                            </button>
+                            <button onClick={handleDeleteSession} className="mb-2 md:mb-0 bg-red-500 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600">Delete</button>
                         </div>
                     </div>
                 </div>

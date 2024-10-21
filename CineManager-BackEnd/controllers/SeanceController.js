@@ -40,7 +40,11 @@ class SeanceController {
         const { id } = req.params;
         const updateData = req.body;
         this.SeanceService.updateSeance(id, updateData)
-            .then(updatedSeance => res.status(200).json(updatedSeance))
+            .then((updatedSeance) =>(
+               
+                
+                res.status(200).json(updatedSeance)
+            ))
             .catch(err => res.status(500).json({ message: err.message }));
     };
 

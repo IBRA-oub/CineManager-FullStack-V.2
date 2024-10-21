@@ -6,55 +6,57 @@ import asyncHandler from "express-async-handler";
 
 class SeanceRepository extends SeanceInterface {
 
-    getAllSeance = async() => {
+    getAllSeance = async () => {
         return SeanceModel.Seance.find()
             .then(seances => {
-                
+
                 return seances;
             });
     };
 
-    createSeance = async({ date_heure, tarif, location, filmId, salleId }) => {
+    createSeance = async ({ date_heure, tarif, location, filmId, salleId }) => {
+
+
         return SalleModel.Salle.findById(salleId)
             .then(salle => {
                 if (!salle) throw new Error("Salle non trouvée");
                 return FilmModel.Film.findById(filmId)
-                .then(film => {
-                    if (!film) throw new Error("Film non trouvé");
+                    .then(film => {
+                        if (!film) throw new Error("Film non trouvé");
 
-                    const places = Array.from({ length: salle.places }, (_, i) => ({
-                        numero: i + 1,
-                        disponible: true,
-                    }));
+                        const places = Array.from({ length: salle.places }, (_, i) => ({
+                            numero: i + 1,
+                            disponible: true,
+                        }));
 
-                    return SeanceModel.Seance.create({
-                        date_heure,
-                        tarif,
-                        location,
-                        film: {
-                            _id: film._id,
-                            titre: film.titre,
-                            genre: film.genre,
-                            duree: film.duree,
-                            annee: film.annee,
-                            image: film.image,
-                            video: film.video,
-                        },
-                        salle: {
-                            nom: salle.nom,
-                            type: salle.type,
-                            places_totales: salle.places,
-                        },
-                        places,
+                        return SeanceModel.Seance.create({
+                            date_heure,
+                            tarif,
+                            location,
+                            film: {
+                                _id: film._id,
+                                titre: film.titre,
+                                genre: film.genre,
+                                duree: film.duree,
+                                annee: film.annee,
+                                image: film.image,
+                                video: film.video,
+                            },
+                            salle: {
+                                nom: salle.nom,
+                                type: salle.type,
+                                places_totales: salle.places,
+                            },
+                            places,
+                        });
                     });
-                });
             });
     };
 
-    getSeance = async(id) => {
+    getSeance = async (id) => {
         return SeanceModel.Seance.findById(id)
             .then(seance => {
-                if (!seance) throw new Error("Seance not found"); 
+                if (!seance) throw new Error("Seance not found");
                 return seance
             });
     };
@@ -68,48 +70,53 @@ class SeanceRepository extends SeanceInterface {
         }
     };
 
-    updateSeance = async(id, updateData) => {
-        return SeanceModel.Seance.findById(id)
-            .then(seance => {
-                if (!seance) throw new Error("Séance non trouvée");
+    updateSeance = async (id, updateData) => {
+        const seance = await SeanceModel.Seance.findById(id);
 
-                if (updateData.filmId) {
-                    return FilmModel.Film.findById(updateData.filmId)
-                        .then(film => {
-                            if (!film) throw new Error("Film non trouvé");
-                            seance.film = {
-                                _id: film._id,
-                                titre: film.titre,
-                                genre: film.genre,
-                                duree: film.duree,
-                                annee: film.annee,
-                                image: film.image,
-                                video: film.video,
-                            };
-                        });
-                }
-                if (updateData.salleId) {
-                    return SalleModel.Salle.findById(updateData.salleId)
-                        .then(salle => {
-                            if (!salle) throw new Error("Salle non trouvée");
-                            seance.salle = {
-                                nom: salle.nom,
-                                type: salle.type,
-                                places_totales: salle.places,
-                            };
-                            seance.places = Array.from({ length: salle.places }, (_, i) => ({
-                                numero: i + 1,
-                                disponible: true,
-                            }));
-                        });
-                }
+        if (!seance) throw new Error("Séance non trouvée");
 
-                Object.assign(seance, updateData);
-                return seance.save();
-            });
+        if (updateData.filmId) {
+            const film = await FilmModel.Film.findById(updateData.filmId);
+            if (!film) throw new Error("Film non trouvé");
+
+            seance.film = {
+                _id: film._id,
+                titre: film.titre,
+                genre: film.genre,
+                duree: film.duree,
+                annee: film.annee,
+                image: film.image,
+                video: film.video,
+            };
+        }
+
+        if (updateData.salleId) {
+            const salle = await SalleModel.Salle.findById(updateData.salleId);
+            if (!salle) throw new Error("Salle non trouvée");
+
+            seance.salle = {
+                nom: salle.nom,
+                type: salle.type,
+                places_totales: salle.places,
+            };
+
+            seance.places = Array.from({ length: salle.places }, (place, i) => ({
+                numero: i + 1,
+                disponible: true,
+            }));
+        }
+
+       
+        Object.assign(seance, updateData);
+
+  
+        return seance.save();
     };
 
-    deleteSeance = async(id) => {
+
+
+
+    deleteSeance = async (id) => {
         return SeanceModel.Seance.findById(id)
             .then(seance => {
                 if (!seance) throw new Error("Seance not found");
@@ -117,10 +124,10 @@ class SeanceRepository extends SeanceInterface {
             });
     };
 
-    getSeancesByFilm = async(filmId) => {
+    getSeancesByFilm = async (filmId) => {
         return SeanceModel.Seance.find({ 'film._id': filmId })
             .then(seances => {
-               
+
                 return seances
             });
     };
