@@ -249,9 +249,10 @@ export default function ShowTime() {
                                 <div className='mb-4'>
                                     <label>Date/Hour</label>
                                     <input
-                                        type='date'
+                                        type='datetime-local'
                                         name='title'
                                         onChange={(e) => setDateField(e.target.value)}
+                                        min={new Date().toISOString().slice(0, 16)}
                                         className='w-full border border-gray-300 rounded-md p-2'
                                     />
                                 </div>
@@ -331,9 +332,10 @@ export default function ShowTime() {
                                 <div className='mb-4'>
                                     <label>Date/Hour</label>
                                     <input
-                                        type='date'
+                                        type='datetime-local'
                                         name='title'
                                         onChange={(e) => setDateField(e.target.value)}
+                                        min={new Date().toISOString().slice(0, 16)}
                                         className='w-full border border-gray-300 rounded-md p-2'
                                     />
                                 </div>

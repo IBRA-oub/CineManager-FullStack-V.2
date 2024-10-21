@@ -11,7 +11,7 @@ export default function SessionSection() {
         const fetchSession = async () => {
             try {
                 const sessionData = await getAllSession();
-                console.log(sessionData)
+             
                 setSessions(sessionData);
             } catch (error) {
                 console.error('Failed to fetch session:', error);
@@ -20,6 +20,8 @@ export default function SessionSection() {
 
         fetchSession();
     }, []);
+
+    const filteredSessions = sessions.filter(session => new Date(session.date_heure) >= new Date());
 
     return (
         <>
@@ -35,7 +37,7 @@ export default function SessionSection() {
                     <div className="flex overflow-x-scroll pb-10 hide-scroll-bar">
                         <div className="flex flex-nowrap  space-x-4 p-8">
                             {/* ============= */}
-                            {sessions.map((session) => (
+                            {filteredSessions.map((session) => (
                                 <div key={session._id} className="relative  w-96 h-72  ">
                                     <div className='h-28 w-full  '>
 
