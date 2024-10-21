@@ -95,9 +95,6 @@ export default function AllSession({id}) {
 
                                         <div className="flex justify-end">
                                             <p className="inline-block font-semibold text-primary whitespace-nowrap leading-tight rounded-xl">
-                                                <span className="text-sm uppercase">
-                                                    $
-                                                </span>
                                                 <span className="text-lg text-yellow-500">{session.tarif} </span> dh/seat
                                             </p>
                                         </div>
