@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import heroImg from '../../assets/images/img2.jpg';
-import { getFilm } from '../../../services/filmApi/getFilmApi';
+import { getFilm } from '../../services/filmApi/getFilmApi';
 
 export default function HeroSection({id}) {
   const [film, setFilm] = useState([]);

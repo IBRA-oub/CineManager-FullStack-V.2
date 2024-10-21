@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../style/AllSeats.css'
-import { getSeance } from '../../../services/sessionApi/getSessionApi';
+import { getSeance } from '../../services/sessionApi/getSessionApi';
 import { Link } from 'react-router-dom';
 
 export default function AllSeats({ id, selectedSeats, setSelectedSeats }) {

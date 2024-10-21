@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import logo from '../../assets/images/logo.png';
-import { getSeance } from '../../../services/sessionApi/getSessionApi';
+import { getSeance } from '../../services/sessionApi/getSessionApi';
 import { Link } from 'react-router-dom';
-import { ratingFilm } from '../../../services/filmApi/rateFilmApi';
-import { getAllRate } from '../../../services/filmApi/getAllRateApi';
+import { ratingFilm } from '../../services/filmApi/rateFilmApi';
+import { getAllRate } from '../../services/filmApi/getAllRateApi';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 

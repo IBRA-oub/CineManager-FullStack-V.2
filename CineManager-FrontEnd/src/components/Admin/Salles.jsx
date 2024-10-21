@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { getAllSalle } from '../../../services/salleApi/getAllSalleApi';
-import { creatSalle } from '../../../services/salleApi/createSalleApi';
-import { updateSalle } from '../../../services/salleApi/updateSalleApi';
-import { deleteSalleApi } from '../../../services/salleApi/deletealleApi';
+import { getAllSalle } from '../../services/salleApi/getAllSalleApi';
+import { creatSalle } from '../../services/salleApi/createSalleApi';
+import { updateSalle } from '../../services/salleApi/updateSalleApi';
+import { deleteSalleApi } from '../../services/salleApi/deletealleApi';
 
 export default function Salles() {
 

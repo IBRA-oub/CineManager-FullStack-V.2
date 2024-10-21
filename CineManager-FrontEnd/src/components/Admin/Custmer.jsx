@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { toggleBanStatus } from '../../../services/userApi/bannedUserApi';
-import { deleteUserApi } from '../../../services/userApi/deleteUserApi';
+import { toggleBanStatus } from '../../services/userApi/bannedUserApi';
+import { deleteUserApi } from '../../services/userApi/deleteUserApi';
 
 export default function Custmer({ allUsers }) {
 

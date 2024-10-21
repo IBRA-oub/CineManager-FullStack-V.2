@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import movieImg from '../../assets/images/img1.jpeg';
 import '../../style/home.css'
-import { getAllFilms } from '../../../services/filmApi/getAllFilmApi';
+import { getAllFilms } from '../../services/filmApi/getAllFilmApi';
 import { Link } from 'react-router-dom';
 
 export default function FilmSection({ filters }) {

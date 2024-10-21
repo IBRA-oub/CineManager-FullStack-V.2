@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import heroImg from '../../assets/images/img2.jpg';
-import { getAllFilmWithSomeGenreApi } from '../../../services/filmApi/getAllFilmWithSomeGenreApi';
+import { getAllFilmWithSomeGenreApi } from '../../services/filmApi/getAllFilmWithSomeGenreApi';
 import { Link } from 'react-router-dom';
 
 export default function FilmSuggestionSection({ film }) {

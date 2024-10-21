@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import movieImg from '../../assets/images/img2.jpg';
-import { getAllSession } from '../../../services/sessionApi/getAllSessionApi';
+import { getAllSession } from '../../services/sessionApi/getAllSessionApi';
 import { Link } from 'react-router-dom';
 
 export default function SessionSection() {

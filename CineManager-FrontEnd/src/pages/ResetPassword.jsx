@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import bgImg from '../assets/images/bgImg.png';
 import { useNavigate, useParams } from 'react-router-dom';
-import { resetPasswordValidation } from '../../hooks/validation/restPasswordValidation';
+import { resetPasswordValidation } from '../hooks/validation/restPasswordValidation';
 import axios from 'axios';
 
 export default function ResetPassword() {

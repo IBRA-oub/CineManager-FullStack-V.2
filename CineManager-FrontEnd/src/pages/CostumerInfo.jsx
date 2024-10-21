@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Custmer from '../components/Admin/Custmer'
 import NavBar from '../components/Admin/NavBar'
-import { getAllUsers } from '../../services/userApi/getAllUsers'
+import { getAllUsers } from '../services/userApi/getAllUsers'
 
 export default function CostumerInfo() {
   const [allUsers,setAllUsers]= useState([])

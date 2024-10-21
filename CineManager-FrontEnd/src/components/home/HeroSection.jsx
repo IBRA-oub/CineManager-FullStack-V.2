@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import logoImg from '../../assets/images/logo.png';
 import { Link } from 'react-router-dom';
-import { getAllFilms } from '../../../services/filmApi/getAllFilmApi';
+import { getAllFilms } from '../../services/filmApi/getAllFilmApi';
 import {jwtDecode} from 'jwt-decode';
 
 

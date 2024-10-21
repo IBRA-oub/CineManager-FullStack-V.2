@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { creatFilm } from '../../../services/filmApi/createFilmApi';
-import { getAllFilms } from '../../../services/filmApi/getAllFilmApi';
-import { updateFilm } from '../../../services/filmApi/updateFilmApi';
-import { deleteFilmApi } from '../../../services/filmApi/deleteFilmApi';
+import { creatFilm } from '../../services/filmApi/createFilmApi';
+import { getAllFilms } from '../../services/filmApi/getAllFilmApi';
+import { updateFilm } from '../../services/filmApi/updateFilmApi';
+import { deleteFilmApi } from '../../services/filmApi/deleteFilmApi';
 
 export default function Film() {
 

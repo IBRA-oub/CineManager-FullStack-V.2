@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react';
 import seatBg from '../assets/images/seatBg.jpg';
 import logo from '../assets/images/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
-import { useLoginValidation } from '../../hooks/validation/userLoginValidation';
-import { loginUserApi } from '../../services/authApi/LoginUserApi';
+import { useLoginValidation } from '../hooks/validation/userLoginValidation';
+import { loginUserApi } from '../services/authApi/LoginUserApi';
 import { jwtDecode } from 'jwt-decode';
 
 

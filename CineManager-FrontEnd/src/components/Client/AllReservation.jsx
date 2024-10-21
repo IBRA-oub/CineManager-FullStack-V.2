@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import img from '../../assets/images/img2.jpg';
-import { getAllResrvation } from '../../../services/reservation/clientReservation';
+import { getAllResrvation } from '../../services/reservation/clientReservation';
 export default function AllReservation() {
 
 

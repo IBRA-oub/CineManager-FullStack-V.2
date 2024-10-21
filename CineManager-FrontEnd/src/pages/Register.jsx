@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react'
 import seatBg from '../assets/images/seatBg.jpg';
 import logo from '../assets/images/logo.png';
 import { Link, useNavigate} from 'react-router-dom';
-import { useRegisterValidation } from '../../hooks/validation/useRegisterValidation';
-import { registerUserApi } from '../../services/authApi/registerUserApi';
+import { useRegisterValidation } from '../hooks/validation/useRegisterValidation';
+import { registerUserApi } from '../services/authApi/registerUserApi';
 
 export default function Register() {
 

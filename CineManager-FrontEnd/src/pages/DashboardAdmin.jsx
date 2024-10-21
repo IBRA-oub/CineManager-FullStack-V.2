@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from '../components/Admin/NavBar'
-import Dashboard from '../components/Admin/dashboard'
-import { getUserInfo } from '../../services/userApi/userInfo'
-import { getCountUser } from '../../services/userApi/getCountUser'
-import { getCountFilmApi } from '../../services/filmApi/getCountFilmApi'
-import { getCountReservationApi } from '../../services/reservation/getCountReservationApi'
-import { getCountSeanceApi } from '../../services/sessionApi/getCountSessionApi'
-import { getAllUsers } from '../../services/userApi/getAllUsers'
+import { getUserInfo } from '../services/userApi/userInfo'
+import { getCountUser } from '../services/userApi/getCountUser'
+import { getCountFilmApi } from '../services/filmApi/getCountFilmApi'
+import { getCountReservationApi } from '../services/reservation/getCountReservationApi'
+import { getCountSeanceApi } from '../services/sessionApi/getCountSessionApi'
+import { getAllUsers } from '../services/userApi/getAllUsers'
+import Dashboard from '../components/Admin/Dashboard'
 
 export default function DashboardAdmin() {
   const [user,setUser]= useState([])

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useRegisterValidation } from '../../../hooks/validation/useRegisterValidation';
-import { updateUserInfo } from '../../../services/userApi/updateUserInfoApi';
+import { useRegisterValidation } from '../../hooks/validation/useRegisterValidation';
+import { updateUserInfo } from '../../services/userApi/updateUserInfoApi';
 
 export default function Dashboard({ user, handleUserUpdate, countUser, countFilm, countReservation, countSeance }) {
 

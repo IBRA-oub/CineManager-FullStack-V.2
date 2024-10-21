@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import CommentSection from '../components/stream/commentSection'
-import FilmSuggestionSection from '../components/stream/filmSuggestionSection'
+
 import VideoSection from '../components/stream/videoSection'
 import { useParams } from 'react-router-dom'
-import { getAllComment } from '../../services/filmApi/getAllCommentApi'
-import { getFilm } from '../../services/filmApi/getFilmApi'
+import { getAllComment } from '../services/filmApi/getAllCommentApi'
+import { getFilm } from '../services/filmApi/getFilmApi'
+import CommentSection from '../components/stream/CommentSection'
+import FilmSuggestionSection from '../components/stream/FilmSuggestionSection'
 
 export default function FilmStream() {
   const [filmComment, setFilmComment] = useState([]);

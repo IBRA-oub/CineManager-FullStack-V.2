@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { getAllSessionByFilm } from '../../../services/sessionApi/getAllSessionByFilmApi';
+import { getAllSessionByFilm } from '../../services/sessionApi/getAllSessionByFilmApi';
 
 export default function AllSession({id}) {
     

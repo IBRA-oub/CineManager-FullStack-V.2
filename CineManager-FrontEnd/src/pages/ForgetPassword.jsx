@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react';
 import bgImg from '../assets/images/bgImg.png';
 import logo from '../assets/images/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
-import { requestResetPasswordValidation } from '../../hooks/validation/requestResetPasswordValidation';
-import { requestRestPAssword } from '../../services/authApi/requestResetPasswordApi';
+import { requestResetPasswordValidation } from '../hooks/validation/requestResetPasswordValidation';
+import { requestRestPAssword } from '../services/authApi/requestResetPasswordApi';
 
 
 

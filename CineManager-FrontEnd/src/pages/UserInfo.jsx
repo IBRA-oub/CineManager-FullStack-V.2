@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Client/navbar'
 import Account from '../components/Client/Account'
-import { getUserInfo } from '../../services/userApi/userInfo'
+import { getUserInfo } from '../services/userApi/userInfo'
 
 export default function UserInfo() {
     const [user,setUser]= useState([])

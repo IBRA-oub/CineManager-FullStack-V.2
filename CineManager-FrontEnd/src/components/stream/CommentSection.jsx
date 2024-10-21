@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { commentFilm } from '../../../services/filmApi/commentFilm';
+import { commentFilm } from '../../services/filmApi/commentFilm';
 import { formatDistanceToNow } from 'date-fns';
 
 export default function CommentSection({ filmComment,setFilmComment,film }) {

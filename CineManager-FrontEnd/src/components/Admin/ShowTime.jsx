@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { getAllSession } from '../../../services/sessionApi/getAllSessionApi';
-import { getAllFilms } from '../../../services/filmApi/getAllFilmApi';
-import { getAllSalle } from '../../../services/salleApi/getAllSalleApi';
-import { creatSession } from '../../../services/sessionApi/createSessionApi';
-import { updateSession } from '../../../services/sessionApi/updateSessionApi';
-import { deleteSessionApi } from '../../../services/sessionApi/deleteSessionApi';
+import { getAllSession } from '../../services/sessionApi/getAllSessionApi';
+import { getAllFilms } from '../../services/filmApi/getAllFilmApi';
+import { getAllSalle } from '../../services/salleApi/getAllSalleApi';
+import { creatSession } from '../../services/sessionApi/createSessionApi';
+import { updateSession } from '../../services/sessionApi/updateSessionApi';
+import { deleteSessionApi } from '../../services/sessionApi/deleteSessionApi';
 
 export default function ShowTime() {
     const [isAddPopupOpen, setIsAddPopupOpen] = useState(false);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import heroImg from '../../assets/images/img2.jpg';
 import axios from 'axios';
-import { getSeance } from '../../../services/sessionApi/getSessionApi';
+import { getSeance } from '../../services/sessionApi/getSessionApi';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function SeatsReseve({ id,selectedSeats, setSelectedSeats }) {
