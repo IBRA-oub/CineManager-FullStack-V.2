@@ -11,15 +11,16 @@ export default function HeroSection() {
   const [films, setFilms] = useState([]);
   const [role, setRole] = useState(null);
 
+  const AllFilms = async () => {
+
+    const filmsData = await getAllFilms();
+    setFilms(filmsData)
+
+  }
   useEffect(() => {
-    const AllFilms = async () => {
-
-      const filmsData = await getAllFilms();
-      setFilms(filmsData)
-
-    }
 
     AllFilms();
+    
 
     const savedToken = localStorage.getItem('token');
    

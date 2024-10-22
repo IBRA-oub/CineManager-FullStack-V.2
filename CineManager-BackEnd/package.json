@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "jest --forceExit",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "start": "nodemon app.js"
   },
   "keywords": [],
@@ -32,10 +32,7 @@
     "jest-esm-transformer": "^1.0.0",
     "supertest": "^7.0.0"
   },
-  "jest": {
-    "transform": {
-      "^.+\\.js$": "babel-jest"
-    },
-    "testEnvironment": "node"
-  }
+ "jest": {
+  "testEnvironment": "node"
+}
 }

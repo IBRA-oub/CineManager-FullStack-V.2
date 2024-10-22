@@ -12,9 +12,9 @@ export default function Film() {
 
     const filmDataFunction = (async () => {
 
-        const filmData = await getAllFilms();
+        const filmDataAllFilm = await getAllFilms();
 
-        setFilm(filmData)
+        setFilm(filmDataAllFilm)
     })
     useEffect(() => {
 

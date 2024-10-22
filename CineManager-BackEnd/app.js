@@ -1,7 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config();
 // const express = require('express');
 import express from "express";
-// const dotenv = require('dotenv');
-import dotenv from "dotenv";
+
 import errorHandler from "./middleware/errorHandler.js";
 import connectDB from "./config/db.js";
 import usersRouter from "./routes/usersRoutes.js";
@@ -16,7 +17,7 @@ import cors from 'cors';
 import path from 'path';
 const app = express();
 
-dotenv.config(); //get variable from .env
+ //get variable from .env
 connectDB();
 
 app.use(cors());
@@ -41,3 +42,5 @@ const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
 })
+
+export default app;
