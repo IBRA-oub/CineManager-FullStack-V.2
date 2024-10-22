@@ -62,10 +62,13 @@ Créez un fichier .env à la racine du projet et ajoutez vos variables d'environ
 
 ## 📝 UML
 1. diagrame de classe 
+![cinéMAnger V 2 Class Diagram (1)](https://github.com/user-attachments/assets/5e656043-5d8c-4215-a41a-7d1a72064c95)
 
 2. use cases
+![use case](https://github.com/user-attachments/assets/ca9f4b58-046e-4b0e-a4f4-4b51c585de59)
 
 3.sequence
+![diagramme-de-sequence](https://github.com/user-attachments/assets/3ef0d722-818c-49bd-b697-a0106c1ae8dc)
 
 
 ## 🔌 Endpoints API documentation 
