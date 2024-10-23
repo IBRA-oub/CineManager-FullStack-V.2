@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRegisterValidation } from '../../hooks/validation/useRegisterValidation';
 import { updateUserInfo } from '../../services/userApi/updateUserInfoApi';
 
@@ -6,26 +6,35 @@ export default function Account({ user,handleUserUpdate }) {
     // console.log(user);
 
     const { validateForm, resetForm, getError, hasError, isFormValided } = useRegisterValidation();
-    const [nameField, setNameField] = useState('');
-    const [emailField, setEmailField] = useState('');
-    const [passwordField, setPasswordField] = useState('');
+    const [nameField, setNameField] = useState(user.nom || ''); 
+    const [emailField, setEmailField] = useState(user.email || '');
     const [imageField, setImageField] = useState('');
-    const [isUpload , setIsUpload] = useState(false)
+    const [isUpload , setIsUpload] = useState(false);
+    const [isExiste, setIsExiste] = useState(false)
 
+
+    useEffect(() => {
+        if (user.nom !== undefined) {
+            setNameField(user.nom); 
+        }
+        if (user.email !== undefined) {
+            setEmailField(user.email); 
+        }
+        
+        
+    }, [user]);
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         let fields = {
             nom: nameField,
             email: emailField,
-            password: passwordField
-
+     
         }
         if (validateForm(fields)) {
             const data = new FormData();
             data.append('nom', nameField);
             data.append('email', emailField);
-            data.append('password', passwordField);
             if (imageField) {
                 data.append('image', imageField);
             }
@@ -39,10 +48,10 @@ export default function Account({ user,handleUserUpdate }) {
 
 
             } catch (error) {
-                document.getElementById("userExists").classList.remove("hidden");
+                setIsExiste(true)
             }
 
-            resetForm({ nameField, emailField, passwordField });
+            resetForm({ nameField, emailField });
         }
 
     }
@@ -80,6 +89,7 @@ export default function Account({ user,handleUserUpdate }) {
                                     <label className="block text-sm font-medium text-gray-700">Username</label>
                                     <input
                                         type="text"
+                                        value={nameField}
                                         onChange={(e) => setNameField(e.target.value)}
                                         className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm"
                                     />
@@ -90,23 +100,15 @@ export default function Account({ user,handleUserUpdate }) {
                                     <label className="block text-sm font-medium text-gray-700">Email address</label>
                                     <input
                                         type="email"
+                                        value={emailField}
                                         onChange={(e) => setEmailField(e.target.value)}
                                         className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm"
                                     />
                                     {hasError("email") && <div className="text-red-400  font-bold">{getError("email")}</div>}
-                                    <div id='userExists' className=" hidden text-red-400 font-bold">email already existe</div>
+                                    {isExiste && <div  className=" hidden text-red-400 font-bold">email already existe</div>}
                                 </div>
 
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Password</label>
-                                    <input
-                                        type="password"
-                                        value={passwordField}
-                                        onChange={(e) => setPasswordField(e.target.value)}
-                                        className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm"
-                                    />
-                                    {hasError("password") && <div className="text-red-400 font-bold">{getError("password")}</div>}
-                                </div>
+                           
 
 
                             </div>
@@ -115,11 +117,10 @@ export default function Account({ user,handleUserUpdate }) {
 
                     <div className="w-80 bg-white rounded-lg shadow p-6">
                         <div className="text-center">
-                            <img
-                                src={user.image || "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"}
-                                alt="Profile Avatar"
-                                className="w-36 h-36 rounded-full mx-auto"
-                            />
+                            <div  className="w-36 h-44 rounded-md mx-auto bg-cover bg-center"style={{  backgroundImage: `url(${user.image ? user.image : "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"})` }} >
+
+                            </div>
+                            
                             <h3 className="text-xl font-bold mt-4">{user.nom}</h3>
 
                             <div className="flex justify-around mt-4">

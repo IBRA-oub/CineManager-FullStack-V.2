@@ -15,15 +15,14 @@ function PrivateRoute({ children, role }) {
       try {
         const decodedToken = jwtDecode(token);
         const userRole = decodedToken?.user?.role;
+        
 
         if (userRole === role) {
           setIsAuthorized(true); 
         } else {
-          if (userRole === 'admin') {
+          
             navigate('/PageNotFound');
-          } else if (userRole === 'client') {
-            navigate('/PageNotFound');
-          }
+          
         }
       } catch (error) {
         console.error('Erreur lors de la décodage du token', error);

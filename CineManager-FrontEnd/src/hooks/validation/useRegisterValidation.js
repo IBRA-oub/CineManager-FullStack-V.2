@@ -9,7 +9,7 @@ export function useRegisterValidation() {
     const validateForm = (fields) => {
         setErrors({});
 
-        const { nom, email, password } = fields;
+        const { nom, email } = fields;
 
         if (nom.trim() === '') {
             setErrors(prevState => ({ ...prevState, name: "fiels required" }));
@@ -25,13 +25,7 @@ export function useRegisterValidation() {
             isFormValid = false;
         }
 
-        if (password.trim() === '') {
-            setErrors(prevState => ({ ...prevState, password: "fiels required" }));
-            isFormValid = false;
-        } else if (!password.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)) {
-            setErrors(prevState => ({ ...prevState, password: "password refused" }));
-            isFormValid = false;
-        }
+      
 
         setIsFormValided(isFormValid);
 
@@ -43,7 +37,7 @@ export function useRegisterValidation() {
     const resetForm = (refs)=>{
         refs.nameField.current.value = '';
         refs.emailField.current.value = '';
-        refs.passwordField.current.value = '';
+       
 
     }
 

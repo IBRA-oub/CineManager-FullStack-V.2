@@ -102,12 +102,7 @@ export default function AllSession({id}) {
                                 </div>
                             </Link>
                         </div>
-                    ))};
-
-
-
-
-
+                    ))}
 
                 </div>
             </div>

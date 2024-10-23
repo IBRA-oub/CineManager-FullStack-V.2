@@ -44,6 +44,8 @@ export default function Login() {
                         }
                     }
                 } else {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
                     navigate('/forbiden');
                 }
             } catch (error) {
