@@ -1,12 +1,116 @@
-import puppeteer from "puppeteer";
+import {Builder, Browser, By, Key, until } from 'selenium-webdriver'
 
-(async () => {
-	
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto('http://localhost:5173');
+import { setTimeout as sleep } from 'timers/promises';
 
-    // perform various browser actions
+(async function testing(){
+    let driver = await new Builder().forBrowser("chrome").build();
 
-    await browser.close();
+    try {
+       
+        
+        await driver.get('http://localhost:5173');
+    
+        await sleep(1000);
+        await driver.findElement(By.id('connectButton')).click();
+        
+        await driver.wait(until.elementLocated(By.id('registerButton')), 10000);
+        await sleep(1000);
+        await driver.findElement(By.id('registerButton')).click();
+        await driver.wait(until.elementLocated(By.id('registerForm')), 10000);
+    
+        
+       
+        for (let character of 'newUser') {
+            await driver.findElement(By.id('username')).sendKeys(character); 
+            await sleep(100); 
+          }
+        for (let character of 'brahimbourih@example.com') {
+            await driver.findElement(By.id('email')).sendKeys(character); 
+            await sleep(100); 
+          }
+        
+          for (let character of 'securePassword123') {
+            await driver.findElement(By.id('password')).sendKeys(character); 
+            await sleep(100); 
+          }
+         
+        await driver.findElement(By.id('registerSubmit')).click();
+    
+        
+        await driver.wait(until.urlContains('login'), 2000);
+        await sleep(1000);
+
+        for (let character of 'brahimbourih@example.com') {
+            await driver.findElement(By.id('email')).sendKeys(character); 
+            await sleep(100); 
+          }
+
+          for (let character of 'securePassword123') {
+            await driver.findElement(By.id('password')).sendKeys(character); 
+            await sleep(100); 
+          }
+
+        await sleep(1000);
+        await driver.findElement(By.id('loginSubmit')).click();
+    
+        
+        await driver.wait(until.urlContains('client-reservation'), 10000);
+        await sleep(1000);
+ 
+        await driver.findElement(By.id('homePage')).click();
+        await sleep(1000);
+        
+        await driver.wait(until.urlContains(''), 10000);
+        await sleep(1000);
+        
+        await driver.findElement(By.id('bookFilm')).click();
+        await sleep(1000);
+        
+        await driver.wait(until.urlContains('all-session-film'), 10000);
+        await sleep(1000);
+        
+        await driver.findElement(By.id('reserver')).click();
+        await sleep(1000);
+        
+        await driver.wait(until.urlContains('reservation'), 10000);
+        await sleep(1000);
+        
+        await driver.findElement(By.id('viewStreame')).click();
+        await sleep(1000);
+        
+        await driver.wait(until.urlContains('film-stream'), 10000);
+        await sleep(1000);
+
+        await driver.findElement(By.id('videoStream')).click();
+        await sleep(1000);
+
+        for (let character of 'it\'s a realy good movies to watch') {
+          await driver.findElement(By.id('comment')).sendKeys(character); 
+          await sleep(100); 
+        }
+
+        await sleep(1000);
+        await driver.findElement(By.id('submitComment')).click();
+        await sleep(5000);
+        
+        await driver.findElement(By.id('backHome')).click();
+        await sleep(1000);
+
+        await driver.wait(until.urlContains(''), 10000);
+        await sleep(1000);
+
+        await driver.findElement(By.id('connectButton')).click();
+        await driver.wait(until.urlContains('my-account'), 10000);
+        await sleep(1000);
+        await driver.findElement(By.id('logoutClient')).click();
+        
+        await driver.wait(until.urlContains(''), 10000);
+        await sleep(1000);
+        
+    
+      } finally {
+      
+        await driver.quit();
+      }
+
 })();

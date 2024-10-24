@@ -41,12 +41,14 @@ export default function CommentSection({ filmComment,setFilmComment,film }) {
                  
                   onChange={(e) => setComment(e.target.value)}
                   type="text"
+                  id="comment"
                   placeholder="Ajoutez un commentaire..."
                   className="w-full bg-gray-800 text-gray-300 placeholder-gray-500 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
                  <div  className='w-full flex justify-end'>
 
                   <button
+                  id="submitComment"
                     type="submit"
                     className="mt-2   bg-[#25252564] hover:bg-[#252525a3] text-white px-10 py-2 rounded-lg "
                   >

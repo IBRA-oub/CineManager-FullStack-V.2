@@ -69,7 +69,7 @@ export default function Login() {
                         <div className=" bg-opacity-50 p-8 rounded-lg w-full max-w-md">
                             <h2 className="text-4xl font-bold text-center text-white mb-6 [text-shadow:_0_4px_8px_#000000]">Sign In</h2>
 
-                            <form onSubmit={handleSubmit}>
+                            <form onSubmit={handleSubmit} id="loginForm">
 
 
                                 <div className="mb-4">
@@ -85,7 +85,7 @@ export default function Login() {
                                     {error && <div className="text-red-400 font-bold">Email Or password is not valid</div>}
                                 </div>
 
-                                <button type="submit" className="w-full py-2 bg-[#ff0707]  text-white font-bold rounded-md hover:bg-white hover:text-[#ff0707]  transition">Submit</button>
+                                <button id="loginSubmit" type="submit" className="w-full py-2 bg-[#ff0707]  text-white font-bold rounded-md hover:bg-white hover:text-[#ff0707]  transition">Submit</button>
                             </form>
                             <Link to="/forget-password" className='text-sm text-white hover:text-blue-500 w-full flex justify-end py-1'>
                                 forget password?
@@ -98,7 +98,7 @@ export default function Login() {
                         <div className='absolute top-[80%] md:top-40 w-[80%] md:w-[35%] h-52 '>
                             <p className='text-white text-center font-bold text-3xl md:text-5xl py-10 [text-shadow:_0_4px_8px_#000000] '>You don’t have an account yet! let’s make one</p>
                             <Link to="/Register" className='text-white [text-shadow:_0_4px_8px_#000000]  flex justify-center'>
-                                <button className='border border-white py-2 px-16 rounded-md font-bold hover:bg-white hover:text-red-700'>
+                                <button id="registerButton" className=' border border-white py-2 px-16 rounded-md font-bold hover:bg-white hover:text-red-700'>
                                     Register
                                 </button>
                             </Link>

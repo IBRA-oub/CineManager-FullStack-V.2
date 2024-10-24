@@ -76,7 +76,7 @@ export default function FilmSection({ filters }) {
                                     {/* Bouton apparaissant au survol */}
                                     <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity bg-black bg-opacity-50">
                                         <Link to={`/all-session-film/${movie._id}`}>
-                                            <button className="text-[#FF1B1F] font-bold hover:shadow-md hover:shadow-white  bg-[#ffffff] w-full py-2 px-9 rounded hover:bg-[#FF1B1F] hover:text-white flex items-center justify-center">
+                                            <button id="bookFilm" className="text-[#FF1B1F] font-bold hover:shadow-md hover:shadow-white  bg-[#ffffff] w-full py-2 px-9 rounded hover:bg-[#FF1B1F] hover:text-white flex items-center justify-center">
                                                 <span>To book</span>
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"

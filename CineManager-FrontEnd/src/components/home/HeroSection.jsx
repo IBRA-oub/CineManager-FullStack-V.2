@@ -68,7 +68,7 @@ export default function HeroSection() {
         <div className="h-10 w-full bg-black bg-opacity-90 flex justify-between items-center">
           <div className="h-9 w-9 bg-cover bg-center" style={{ backgroundImage: `url(${logoImg})` }}></div>
           <Link to={role === 'admin' ? '/dashboard-admin' : role === 'client' ? '/my-account' : '/login'} className='hidden md:block mr-7'>
-            <button className="text-white px-11 bg-[#FF1B1F] font-bold w-full py-1 rounded hover:bg-[#ff4f51]">
+            <button id="connectButton" className=" text-white px-11 bg-[#FF1B1F] font-bold w-full py-1 rounded hover:bg-[#ff4f51]">
               {role ?  'Dashboard' : 'Connect'}
             </button>
           </Link>

@@ -74,10 +74,10 @@ export default function Register() {
                         <div className=" bg-opacity-50 p-8 rounded-lg w-full max-w-md">
                             <h2 className="text-4xl font-bold text-center text-white mb-6 [text-shadow:_0_4px_8px_#000000]">Register</h2>
 
-                            <form onSubmit={handleSubmit}>
+                            <form onSubmit={handleSubmit} id="registerForm">
                                 <div className="mb-4">
-                                    <label htmlFor="full-name" className="block text-white mb-2">Full-Name</label>
-                                    <input ref={nameField} type="text" id="full-name" name="full-name" className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
+                                    <label htmlFor="username" className="block text-white mb-2">Full-Name</label>
+                                    <input ref={nameField} type="text" id="username" name="full-name" className=" w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
                                     {hasError("name") && <div className="text-red-400  font-bold">{getError("name")}</div>}
                                 </div>
 
@@ -94,7 +94,7 @@ export default function Register() {
                                     {hasError("password") && <div className="text-red-400 font-bold">{getError("password")}</div>}
                                 </div>
 
-                                <button type="submit" className="w-full py-2 bg-[#ff0707]  text-white font-bold rounded-md hover:bg-white hover:text-[#ff0707]  transition">Submit</button>
+                                <button id="registerSubmit" type="submit" className="w-full py-2 bg-[#ff0707]  text-white font-bold rounded-md hover:bg-white hover:text-[#ff0707]  transition">Submit</button>
                             </form>
                         </div>
                     </div>

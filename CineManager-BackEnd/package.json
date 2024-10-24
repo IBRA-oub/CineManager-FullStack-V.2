@@ -23,7 +23,8 @@
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.15",
     "nodemon": "^3.1.7",
-    "puppeteer": "^23.6.0"
+    "save": "^2.9.0",
+    "selenium-webdriver": "^4.25.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

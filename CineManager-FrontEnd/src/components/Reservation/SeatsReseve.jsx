@@ -113,7 +113,7 @@ export default function SeatsReseve({ id,selectedSeats, setSelectedSeats }) {
 
                         <div className="flex justify-between mt-16">
                             <button onClick={handleCancelReservation} className="border font-bold border-[#FF1B1F] text-[#FF1B1F] hover:bg-red-700 hover:text-white px-4 py-2">Cancel</button>
-                            <button className="bg-[#FF1B1F] font-bold hover:bg-green-700 text-white px-4 py-2 ">Confirm</button>
+                            <button id="confermReservation" type='submit' className="bg-[#FF1B1F] font-bold hover:bg-green-700 text-white px-4 py-2 ">Confirm</button>
                         </div>
                     </div>
                 </form>
