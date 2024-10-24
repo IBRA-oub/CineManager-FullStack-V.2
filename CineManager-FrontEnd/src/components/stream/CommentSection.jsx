@@ -2,19 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { commentFilm } from '../../services/filmApi/commentFilm';
 import { formatDistanceToNow } from 'date-fns';
 
-export default function CommentSection({ filmComment,setFilmComment,film }) {
-  
+export default function CommentSection({ filmComment, setFilmComment, film }) {
+
 
   const [comment, setComment] = useState('');
-  const handleSubmitComment = async(e) => {
+  const handleSubmitComment = async (e) => {
 
     e.preventDefault();
     const data = {
       comment,
-      filmId:film._id
+      filmId: film._id
     };
 
-    const newComment  = await commentFilm(data);
+    const newComment = await commentFilm(data);
     setFilmComment((prevComments) => [...prevComments, newComment]);
 
     setComment('');
@@ -23,7 +23,7 @@ export default function CommentSection({ filmComment,setFilmComment,film }) {
   return (
     <>
 
-      <div  className=" text-white">
+      <div className=" text-white">
         <div className="w-[95%] mt-10 p-4">
           <div className="flex items-start space-x-4">
 
@@ -38,17 +38,17 @@ export default function CommentSection({ filmComment,setFilmComment,film }) {
               <form onSubmit={handleSubmitComment} >
 
                 <input
-                 
+
                   onChange={(e) => setComment(e.target.value)}
                   type="text"
                   id="comment"
                   placeholder="Ajoutez un commentaire..."
                   className="w-full bg-gray-800 text-gray-300 placeholder-gray-500 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
-                 <div  className='w-full flex justify-end'>
+                <div className='w-full flex justify-end'>
 
                   <button
-                  id="submitComment"
+                    id="submitComment"
                     type="submit"
                     className="mt-2   bg-[#25252564] hover:bg-[#252525a3] text-white px-10 py-2 rounded-lg "
                   >
@@ -60,12 +60,12 @@ export default function CommentSection({ filmComment,setFilmComment,film }) {
           </div>
         </div>
       </div>
-     
-     
-     {filmComment.map((comment) => (
-        
+
+
+      {filmComment.map((comment) => (
+
         <div key={comment._id} className=" text-white">
-          
+
           <div className=" w-[90%]  mx-10  mt-10 text-white">
             <div className="border bg-[#252525] border-gray-700 rounded-lg p-4 flex items-start space-x-4">
 
@@ -88,15 +88,15 @@ export default function CommentSection({ filmComment,setFilmComment,film }) {
                 </div>
 
                 <p className="text-base">
-                  {comment.comment}  
+                  {comment.comment}
                 </p>
               </div>
             </div>
           </div>
         </div>
       ))}
-   
-    
+
+
 
 
     </>

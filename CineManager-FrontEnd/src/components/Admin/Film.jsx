@@ -130,7 +130,7 @@ export default function Film() {
         <>
             <div className='pt-10 '>
                 <div className='h-12 w-full  flex justify-end'>
-                    <button onClick={openAddPopup} className='px-12 rounded-md font-bold mr-40 bg-[#e5e5e5]'>Add</button>
+                    <button id="addButton" onClick={openAddPopup} className='px-12 rounded-md font-bold mr-40 bg-[#e5e5e5]'>Add</button>
                 </div>
                 <div className="flex  min-h-screen  justify-center ">
                     <div className="p-6 w-[80%] min-h-screen bg-white">
@@ -296,10 +296,11 @@ export default function Film() {
                                 X
                             </button>
                             <h2 className='text-center font-bold mb-4'>Add new film</h2>
-                            <form onSubmit={handleSubmit} >
+                            <form onSubmit={handleSubmit} id="addForm">
                                 <div className='mb-4'>
                                     <label>Titre</label>
                                     <input
+                                        id="titre"
                                         type='text'
                                         name='titre'
                                         onChange={(e) => setTitleField(e.target.value)}
@@ -309,6 +310,7 @@ export default function Film() {
                                 <div className='mb-4'>
                                     <label>Description</label>
                                     <textarea
+                                        id="description"
                                         name='description'
                                         onChange={(e) => setDescriptionField(e.target.value)}
                                         className='w-full border border-gray-300 rounded-md p-2'
@@ -317,6 +319,7 @@ export default function Film() {
                                 <div className='mb-4'>
                                     <label>Genre</label>
                                     <input
+                                        id="genre"
                                         type='text'
                                         name='genre'
                                         onChange={(e) => setGenreField(e.target.value)}
@@ -326,6 +329,7 @@ export default function Film() {
                                 <div className='mb-4'>
                                     <label>Duration</label>
                                     <input
+                                        id="duration"
                                         type='number'
                                         name='duree'
                                         onChange={(e) => setDurationField(e.target.value)}
@@ -335,7 +339,7 @@ export default function Film() {
                                 <div className='mb-4'>
                                     <label>Year</label>
                                     <input
-
+                                        id="year"
                                         type='date'
                                         name='annee'
                                         onChange={(e) => setYearField(e.target.value)}
@@ -345,6 +349,7 @@ export default function Film() {
                                 <div className='mb-4'>
                                     <label>Image (URL)</label>
                                     <input
+                                        id="image"
                                         type='file'
                                         name='image'
                                         onChange={handleImageChange}
@@ -354,6 +359,7 @@ export default function Film() {
                                 <div className='mb-4'>
                                     <label>Vidéo (URL)</label>
                                     <input
+                                    id="video"
                                         type='file'
                                         name='video'
                                         onChange={handleVideoChange}
@@ -362,6 +368,7 @@ export default function Film() {
                                 </div>
                                 <div className='flex justify-end'>
                                     <button
+                                    id="AddSubmitbutton"
                                         type='submit'
                                         className=' w-full px-4 py-2 bg-green-600 text-white rounded-md'
                                     >
